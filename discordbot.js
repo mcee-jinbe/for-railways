@@ -133,7 +133,7 @@ client.on('messageCreate', async message => {
     message.channel.send({
       embeds: [{
         title: 'このBOTについて',
-        description: '作成：Hoshimikan6490',
+        description: '作成：Hoshimikan6490\n起動:https://railway.app',
         color: 3823616,
         timestamp: new Date(),
         thumbnail: {
