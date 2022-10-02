@@ -1,7 +1,7 @@
 {
-  "name": "discordjs-startup",
+  "name": "jinbe-for-railway",
   "version": "1.0.0",
-  "description": "discord.js on Heroku",
+  "description": "This is jinbe BOT's program for railway.app",
   "main": "discordbot.js",
   "scripts": {
     "start": "node discordbot.js",
@@ -11,7 +11,7 @@
     "type": "git",
     "url": "git+https://github.com/DiscordBotPortalJP/discordjs-startup.git"
   },
-  "author": "Discord Bot Portal JP",
+  "author": "Hoshimikan6490",
   "license": "MIT",
   "dependencies": {
     "discord.js": "^14.3.0",
