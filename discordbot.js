@@ -196,7 +196,7 @@ client.on("messageCreate", async message => {
           color: 0x227fff
         }
       ],
-      files: ['index.js']
+      files: ['discordbot.js']
     });
   } else {
     message.channel.send({
