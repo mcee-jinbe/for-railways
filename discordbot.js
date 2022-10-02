@@ -14,7 +14,7 @@ client.on("ready", () => {
   // ステータスを設定する
   setInterval(() => {
     client.user.setActivity({
-      name: `所属サーバー数は、${client.guilds.cache.size}サーバー｜　Ping値は、${client.ws.ping}ms｜　replit.comで起動中です`
+      name: `所属サーバー数は、${client.guilds.cache.size}サーバー｜　Ping値は、${client.ws.ping}ms｜　railway.appで起動中です`
     })
   }, 10000)
   client.channels.cache.get("913953017550745618").send("replit.comで起動しました！");
