@@ -104,7 +104,20 @@ client.on("messageCreate", async message => {
   if (!message.content.startsWith(prefix) || message.author.bot) return;
   const args = message.content.slice(prefix.length).trim().split(' ');
   const command = args.shift().toLowerCase();
-  if (command === '2022') {
+  if (command === 'hb') {
+    message.channel.send({
+      contents: "<@312570699711774721>",
+      embeds: [
+        {
+          title: '🎊たんおめ！🎊',
+	  description: '<@312570699711774721>さん　お誕生日おめでとうございます！\n(ついでに ㊗成人)',
+          color: 0xFF30FF,
+          timestamp: new Date()
+        }
+      ]
+    });
+    message.delete();
+  } else if (command === '2022') {
     message.channel.send({
       embeds: [
         {
