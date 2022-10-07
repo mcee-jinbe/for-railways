@@ -106,7 +106,7 @@ client.on("messageCreate", async message => {
   const command = args.shift().toLowerCase();
   if (command === 'hb') {
     message.channel.send({
-      contents: "<@312570699711774721>",
+      content: "<@312570699711774721>",
       embeds: [
         {
           title: '🎊たんおめ！🎊',
