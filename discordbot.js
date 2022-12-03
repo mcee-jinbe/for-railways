@@ -1,3 +1,17 @@
+$(function() {
+	setInterval(function(){
+		$.ajax({
+			type: 'post',
+      url: 'https://botdd.alpaca131.com/api/heartbeat',
+      data: {
+        'Authorization': 'd5818dc540ac6e885d629050f54f59e4'
+      },
+      success: function(data){
+      }
+    });
+  }, 50 * 1000);
+});
+
 // Discord bot implements
 const { Client, GatewayIntentBits, ActionRowBuilder, ButtonBuilder, ButtonStyle } = require('discord.js');
 const client = new Client({
