@@ -7,6 +7,9 @@ const prefix = "mc!"
 const token = process.env['TOKEN']
 const util = require('util')
 const wait = util.promisify(setTimeout);
+const check_WebSocket = new WebSocket("wss://botdd.alpaca131.com/api/heartbeat", ["Authorization": "d5818dc540ac6e885d629050f54f59e4"]);
+
+
 // botが準備できれば発動され、 上から順に処理される。
 client.on("ready", () => {
   // コンソールにReady!!と表示
@@ -16,15 +19,7 @@ client.on("ready", () => {
     client.user.setActivity({
       name: `所属サーバー数は、${client.guilds.cache.size}サーバー｜　Ping値は、${client.ws.ping}ms｜　railway.appで起動中です`
     });
-    $.ajax({
-			type: 'post',
-      url: 'https://botdd.alpaca131.com/api/heartbeat',
-      data: {
-        'Authorization': 'd5818dc540ac6e885d629050f54f59e4'
-      },
-      success: function(data){
-      }
-    });
+    check_WebSocket.send();
   }, 50 * 1000);
   client.channels.cache.get("889486664760721418").send("railway.appで起動しました！");
   // readyイベントここまで
