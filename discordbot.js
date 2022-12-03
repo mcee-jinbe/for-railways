@@ -1,17 +1,3 @@
-$(function() {
-	setInterval(function(){
-		$.ajax({
-			type: 'post',
-      url: 'https://botdd.alpaca131.com/api/heartbeat',
-      data: {
-        'Authorization': 'd5818dc540ac6e885d629050f54f59e4'
-      },
-      success: function(data){
-      }
-    });
-  }, 50 * 1000);
-});
-
 // Discord bot implements
 const { Client, GatewayIntentBits, ActionRowBuilder, ButtonBuilder, ButtonStyle } = require('discord.js');
 const client = new Client({
@@ -29,8 +15,8 @@ client.on("ready", () => {
   setInterval(() => {
     client.user.setActivity({
       name: `所属サーバー数は、${client.guilds.cache.size}サーバー｜　Ping値は、${client.ws.ping}ms｜　railway.appで起動中です`
-    })
-  }, 10000)
+    });
+  }, 50 * 1000);
   client.channels.cache.get("889486664760721418").send("railway.appで起動しました！");
   // readyイベントここまで
 });
