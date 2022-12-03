@@ -7,7 +7,7 @@ const prefix = "mc!"
 const token = process.env['TOKEN']
 const util = require('util')
 const wait = util.promisify(setTimeout);
-const check_WebSocket = new WebSocket("wss://botdd.alpaca131.com/api/heartbeat", ["Authorization": "d5818dc540ac6e885d629050f54f59e4"]);
+const check_WebSocket = new WebSocket("wss://botdd.alpaca131.com/api/heartbeat", ["d5818dc540ac6e885d629050f54f59e4"]);
 
 
 // botが準備できれば発動され、 上から順に処理される。
