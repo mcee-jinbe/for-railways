@@ -172,13 +172,13 @@ mongoose //mongooseについて
   .connect(mong_db_info, {
     useNewUrlParser: true, //任意
   })
-  .set('strictQuery', true)
   .then(() => {
     console.log('データベースに接続したんだゾ');
   })
   .catch((error) => {
     console.log(error); //エラー出力
   });
+mongoose.set('strictQuery', true);
 
 //　ユーザー参加時の処理
 client.on('guildMemberAdd', async (member) => {
