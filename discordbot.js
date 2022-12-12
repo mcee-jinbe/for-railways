@@ -172,7 +172,7 @@ mongoose //mongooseについて
   .connect(mong_db_info, {
     useNewUrlParser: true, //任意
   })
-  .set('strictQuery', true);
+  .set('strictQuery', true)
   .then(() => {
     console.log('データベースに接続したんだゾ');
   })
