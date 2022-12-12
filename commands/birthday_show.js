@@ -1,5 +1,5 @@
 const { ApplicationCommandOptionType } = require('discord.js');
-const { client } = require("../index.js")
+const { client } = require("../discordbot.js")
 
 module.exports = {
   data: {
