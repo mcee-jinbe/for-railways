@@ -566,16 +566,15 @@ client.on('interactionCreate', async (interaction) => {
   }
 
   if (interaction.customId === 'delete_database_Yes') {
-    await interaction.deferReply();
     const model = require('./models/profileSchema');
     model.deleteMany({}, function(err) {
       if (err) {
-        interaction.editReply(
+        interaction.reply(
           '内部エラーが発生しました。\nコンソールを確認してください！'
         );
         console.error(err);
       } else {
-        interaction.editReply('✅削除しました！');
+        interaction.reply('✅削除しました！');
       }
     });
     interaction.message.delete();
