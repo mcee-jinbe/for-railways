@@ -66,7 +66,7 @@ function birthday_check() {
       } else {
         //誕生日を祝う
         client.channels.cache
-          .get('835298730922999851')
+          .get('1051843502583058563')
           .send({
             content: "<@" + birthday_man_id + ">",
             embeds: [
