@@ -426,7 +426,9 @@ client.on('interactionCreate', async (interaction) => {
     const random = Math.floor(Math.random() * arr.length);
     const result = arr[random];
 
-    if (random === 4 || random === 7) {
+    if (random === 1) {
+      var file_pas = 'photos/jinbe_daikiti.png;
+    } else if (random === 4 || random === 7) {
       var file_pas = 'photos/jinbe_pien.png';
     } else if (random === 5) {
       var file_pas = 'photos/jinbe_pien2.png';
