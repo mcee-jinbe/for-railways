@@ -100,6 +100,7 @@ module.exports = {
               // 内容を更新
               model.birthday_month = new_birthday_month;
               model.birthday_day = new_birthday_day;
+              model.status = 'yet'
               model.save(async function(err, model) {
                 if (err) {
                   console.log(err.message);
