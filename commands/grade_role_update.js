@@ -1,5 +1,5 @@
 const { PermissionsBitField } = require("discord.js");
-const { client } = require("../index.js");
+const { client } = require("../discordbot.js");
 const { setTimeout } = require("node:timers/promises");
 
 module.exports = {
