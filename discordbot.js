@@ -456,7 +456,7 @@ client.on("interactionCreate", async (interaction) => {
       content: "<@" + interaction.user.id + ">",
       embeds: [
         {
-          title: "おみくじの結果！",
+          title: "🎍お正月おみくじの結果！🎍",
           description: `あなたは、${result}を引きました！\n\n||\`ここだけの話、\`<@${interaction.user.id}> \`さんは、${number}を押したらしいよ...\`||`,
           color: 4817413,
           thumbnail: {
