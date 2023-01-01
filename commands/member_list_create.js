@@ -1,4 +1,4 @@
-const {client} = require("../discordbot.js")
+const {client} = require("../index.js")
 
 module.exports = {
   data: {
