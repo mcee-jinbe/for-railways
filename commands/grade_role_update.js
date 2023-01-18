@@ -41,13 +41,16 @@ module.exports = {
         const grade_role_kou3 = await interaction.guild.roles.cache.find(
           (role) => role.name === "高校3年生"
         );
-        const grade_role_kou3_id = grade_role_kou3.id;
         const grade_role_sotugyo = await interaction.guild.roles.cache.find(
           (role) => role.name === "■≫卒業生"
         );
-        if (user.roles.cache.has(grade_role_kou3_id)) {
+        const grade_role_seito = await interaction.guild.roles.cache.find(
+          (role) => role.name === "■≫生徒"
+        );
+        if (user.roles.cache.has(grade_role_kou3.id)) {
           user.roles.remove(grade_role_kou3);
           user.roles.add(grade_role_sotugyo);
+          user.roles.remove(grade_role_seito);
         } else {
           ///////////////////////////////////////////////////////////////////
           // それ以外のロール処理
