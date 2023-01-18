@@ -43,7 +43,7 @@ module.exports = {
         );
         const grade_role_kou3_id = grade_role_kou3.id;
         const grade_role_sotugyo = await interaction.guild.roles.cache.find(
-          (role) => role.name === "卒業生"
+          (role) => role.name === "■≫卒業生"
         );
         if (user.roles.cache.has(grade_role_kou3_id)) {
           user.roles.remove(grade_role_kou3);
