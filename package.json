@@ -1,8 +1,9 @@
 {
   "name": "jinbe-for-railway",
   "version": "1.0.0",
+  "type": "module",
   "description": "This is jinbe BOT's program for railway.app",
-  "main": "discordbot.js",
+  "main": "index.js",
   "scripts": {
     "start": "node discordbot.js",
     "lint": "eslint ."
