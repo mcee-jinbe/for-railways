@@ -25,10 +25,13 @@ const profileModel = require("./models/profileSchema");
 const prefix = "mc!";
 const util = require("util");
 const wait = util.promisify(setTimeout);
+const fetch = (...args) => Promise.resolve().then(() => __importStar(require('node-fetch'))).then(({ default: fetch }) => fetch(...args))
 
 //機密情報取得
 const token = process.env["bot_token"];
 const mong_db_info = process.env["mongodb_token"];
+const url_check_api = process.env["url_check_api"];
+
 
 const commands = {};
 const commandFiles = fs
@@ -49,7 +52,7 @@ function birthday_check() {
   let today_day = String(parseInt(today.split("-")[1])); // 先頭の0を削除するためにString(parseInt())を入れている
   profileModel.findOne(
     { birthday_month: today_month, birthday_day: today_day },
-    function (err, model) {
+    function(err, model) {
       if (err) {
         console.log(err.message);
         return;
@@ -58,10 +61,10 @@ function birthday_check() {
       if (model == null) {
         console.log(
           "今日(" +
-            today_month +
-            "月" +
-            today_day +
-            "日)、誕生日の人は確認できませんでした。"
+          today_month +
+          "月" +
+          today_day +
+          "日)、誕生日の人は確認できませんでした。"
         );
         return;
       } else {
@@ -95,7 +98,7 @@ function birthday_check() {
 
           //status更新
           model.status = "finished";
-          model.save(function (err, model) {
+          model.save(function(err, model) {
             if (err) {
               console.log(err.message);
               client.channels.cache
@@ -209,8 +212,67 @@ client.on("guildMemberAdd", async (member) => {
   }
 });
 
+//URLチェックの動作を指定
+async function getSafe(urls, message) {
+  let request_url =
+    "https://safebrowsing.googleapis.com/v4/threatMatches:find?key=" +
+    url_check_api;
+
+  let data = {
+    client: {
+      clientId: "jinbe",
+      clientVersion: "1.5.2",
+    },
+    threatInfo: {
+      threatTypes: ["MALWARE", "SOCIAL_ENGINEERING"],
+      platformTypes: ["WINDOWS"],
+      threatEntryTypes: ["URL"],
+      threatEntries: urls.map((f) => {
+        return { url: f };
+      }),
+    },
+  };
+
+  fetch(request_url, {
+    method: "POST", // or 'PUT'
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(data),
+  })
+    .then((response) => response.json())
+    .then((data) => {
+      if ('matches' in data) {
+        message.channel.send({
+          embeds: [
+            {
+              title: "⚠⚠⚠危険なURLを検知しました！⚠⚠⚠",
+              description: `<@${message.author.id}> が投稿した内容には、__危険なURLが含まれる可能性が高いです__\n\n__**絶対に、アクセスしないでください!**__`,
+              color: 0xFF0000,
+              footer: {
+                text: "アクセスする際は、自己責任でお願いいたします。"
+              },
+            }
+          ]
+        });
+      } else {
+        return;
+      }
+    });
+}
+
 // botがメッセージを受信すると発動され、 上から順に処理される。
 client.on("messageCreate", async (message) => {
+  if (message.author.bot) return;
+
+  //危険なURLに警告
+  let urls = String(message.content).match(
+    /https?:\/\/[-_.!~*\'()a-zA-Z0-9;\/?:\@&=+\$,%#\u3000-\u30FE\u4E00-\u9FA0\uFF01-\uFFE3]+/g
+  );
+  if (urls) {
+    getSafe(urls, message);
+  }
+
   // プレフィクスが要らない系コマンド
   if (
     message.content.match(/jinbeおはよう/) ||
@@ -304,7 +366,7 @@ client.on("messageCreate", async (message) => {
   }
 
   // プレフィクスが必要系コマンド
-  if (!message.content.startsWith(prefix) || message.author.bot) return;
+  if (!message.content.startsWith(prefix)) return;
   const args = message.content.slice(prefix.length).trim().split(" ");
   const command = args.shift().toLowerCase();
 
@@ -368,9 +430,8 @@ client.on("messageCreate", async (message) => {
       embeds: [
         {
           title: "🏓Ping!!",
-          description: `Pingは ${
-            Date.now() - message.createdTimestamp
-          }msです。\n APIのPingは ${Math.round(client.ws.ping)}msです。`,
+          description: `Pingは ${Date.now() - message.createdTimestamp
+            }msです。\n APIのPingは ${Math.round(client.ws.ping)}msです。`,
           color: 15132165,
           timestamp: new Date(),
         },
@@ -579,7 +640,7 @@ client.on("interactionCreate", async (interaction) => {
 
   if (interaction.customId === "delete_database_Yes") {
     const model = require("./models/profileSchema");
-    model.deleteMany({}, function (err) {
+    model.deleteMany({}, function(err) {
       if (err) {
         interaction.reply(
           "内部エラーが発生しました。\nコンソールを確認してください！"
