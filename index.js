@@ -1,14 +1,6 @@
-const http = require("http");
-http
-  .createServer(function (req, res) {
-    res.write("Discord bot is active.\nPleace check it.");
-    res.end();
-  })
-  .listen(8000);
-
-import fs from "fs";
+const fs = require("fs");
 // Discord bot implements
-import {
+const {
   Client,
   GatewayIntentBits,
   InteractionType,
@@ -16,7 +8,7 @@ import {
   ButtonBuilder,
   ButtonStyle,
   PermissionsBitField,
-} from "discord.js";
+} = require("discord.js");
 const client = new Client({
   intents: [
     GatewayIntentBits.Guilds,
@@ -26,26 +18,20 @@ const client = new Client({
   ],
 });
 module.exports.client = client;
-import cron from "node-cron";
-import { formatToTimeZone } from "date-fns-timezone";
-import mongoose from "mongoose";
-import profileModel from "./models/profileSchema";
+const cron = require("node-cron");
+const { formatToTimeZone } = require("date-fns-timezone");
+const mongoose = require("mongoose");
+const profileModel = require("./models/profileSchema");
 const prefix = "mc!";
-import util from "util";
+const util = require("util");
 const wait = util.promisify(setTimeout);
-import fetch from "node-fetch";
-
 //機密情報取得
 const token = process.env["bot_token"];
 const mong_db_info = process.env["mongodb_token"];
-const url_check_api = process.env["url_check_api"];
-
-
 const commands = {};
 const commandFiles = fs
   .readdirSync("./commands")
   .filter((file) => file.endsWith(".js"));
-
 for (const file of commandFiles) {
   const command = require(`./commands/${file}`);
   commands[command.data.name] = command;
