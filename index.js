@@ -25,9 +25,12 @@ const profileModel = require("./models/profileSchema");
 const prefix = "mc!";
 const util = require("util");
 const wait = util.promisify(setTimeout);
+
 //機密情報取得
 const token = process.env["bot_token"];
 const mong_db_info = process.env["mongodb_token"];
+const url_check_api = process.env["url_check_api"];
+
 const commands = {};
 const commandFiles = fs
   .readdirSync("./commands")
