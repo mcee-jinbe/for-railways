@@ -25,6 +25,7 @@ const profileModel = require("./models/profileSchema");
 const prefix = "mc!";
 const util = require("util");
 const wait = util.promisify(setTimeout);
+const fetch = require("node-fetch");
 
 //機密情報取得
 const token = process.env["bot_token"];
