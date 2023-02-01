@@ -1,6 +1,14 @@
-const fs = require("fs");
+const http = require("http");
+http
+  .createServer(function (req, res) {
+    res.write("Discord bot is active.\nPleace check it.");
+    res.end();
+  })
+  .listen(8000);
+
+import fs from "fs";
 // Discord bot implements
-const {
+import {
   Client,
   GatewayIntentBits,
   InteractionType,
@@ -8,7 +16,7 @@ const {
   ButtonBuilder,
   ButtonStyle,
   PermissionsBitField,
-} = require("discord.js");
+} from "discord.js";
 const client = new Client({
   intents: [
     GatewayIntentBits.Guilds,
@@ -18,14 +26,14 @@ const client = new Client({
   ],
 });
 module.exports.client = client;
-const cron = require("node-cron");
-const { formatToTimeZone } = require("date-fns-timezone");
-const mongoose = require("mongoose");
-const profileModel = require("./models/profileSchema");
+import cron from "node-cron";
+import { formatToTimeZone } from "date-fns-timezone";
+import mongoose from "mongoose";
+import profileModel from "./models/profileSchema";
 const prefix = "mc!";
-const util = require("util");
+import util from "util";
 const wait = util.promisify(setTimeout);
-const fetch = (...args) => Promise.resolve().then(() => __importStar(require('node-fetch'))).then(({ default: fetch }) => fetch(...args))
+import fetch from "node-fetch";
 
 //機密情報取得
 const token = process.env["bot_token"];
